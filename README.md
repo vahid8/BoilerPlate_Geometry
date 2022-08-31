@@ -103,3 +103,20 @@ from simpledbf import Dbf5
 dbf = Dbf5(file_path)
 df = dbf.to_dataframe()
 ```
+
+#### shapely help
+####### offset polygons border to the outside
+```
+coords = [(0, 0),  (0,1), (1, 1), (1, 0) ]
+s = Polygon(coords)
+t = Polygon(s.buffer(1.0).exterior)
+gdf_points = geopandas.GeoDataFrame([s],
+                                    columns=["geometry"])
+gdf_points.to_file("tt.shp")
+gdf_points = geopandas.GeoDataFrame([t],
+                                    columns=["geometry"])
+gdf_points.to_file("tt2.shp")
+```
+
+    
+
