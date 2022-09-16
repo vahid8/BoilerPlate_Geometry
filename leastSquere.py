@@ -26,6 +26,24 @@ print(f"L(observations) = {L}")
 X_cap = np.linalg.inv(design_matrix.T @ design_matrix) @ (design_matrix.T @ L)
 print(f"calculated X : {X_cap}")
 
+# Gradient descent:
+alpha = 0.5  #'learning rate'
+a_init = 5
+b_init = 3
+for jj in range(20):
+    residual = list()
+    for i in range(3):
+        r = float(y.subs(a, a_init).subs(b, b_init).subs(x, observation_x[i]).evalf() - observation_y[i])
+        residual.append(r)
+
+    a_init = a_init - alpha * (1/3)*sum([item1*item2 for item1, item2 in zip(residual, observation_x)])
+    b_init = b_init - alpha * (1/3)*sum(residual)
+    print(f'a = {a_init}, b= {b_init}')
+
+
+
+
+
 print("_"*20)
 ### ----- Non-linear problem -------------
 # equation : y = a.(b^2).x + b  true values for simulation -> a=3, b=2
@@ -73,3 +91,18 @@ for jj in range(5):
     print(a_init)
     print(b_init)
     print('*'*10)
+
+
+# Gradient descent:
+alpha = 0.0006  #'learning rate'
+a_init = 5
+b_init = 3
+for jj in range(20):
+    residual = list()
+    for i in range(3):
+        r = float(y.subs(a, a_init).subs(b, b_init).subs(x, observation_x[i]).evalf() - observation_y[i])
+        residual.append(r)
+
+    a_init = a_init - alpha * (1/3)*sum([item1*item2*(b_init**2) for item1, item2 in zip(residual, observation_x)])
+    b_init = b_init - alpha * (1/3)*sum([item1*item2*2*a_init*b_init+1 for item1, item2 in zip(residual, observation_x)])
+    print(f'a = {a_init}, b= {b_init}')
