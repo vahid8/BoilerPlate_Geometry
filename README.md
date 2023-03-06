@@ -9,6 +9,7 @@
 ## Searching KDTree
 ```
 from sklearn.neighbors import KDTree
+//center = [(item.max_x + item.min_x) / 2, (item.max_y + item.min_y) / 2]
 centers = np.array(centers)
 centers_tree = KDTree(centers) # create tree of centers
 nearest_dist, nearest_idx = centers_tree.query(cam_6degree["pos"][:2].reshape(1,2), k=4) # search for 4 NEAREST CENTERS to the cam pos
