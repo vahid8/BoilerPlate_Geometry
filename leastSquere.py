@@ -93,7 +93,7 @@ for jj in range(5):
     print('*'*10)
 
 
-# Gradient descent:
+# Gradient descent: does not work here
 alpha = 0.0006  #'learning rate'
 a_init = 5
 b_init = 3
